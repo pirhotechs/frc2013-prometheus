@@ -1,0 +1,6 @@
+MIDlet-Name: FRC2013-Prometheus
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: FIRST
+MIDlet-1: FRC2013Prometheus, , com.pirhotechs.frc2013prometheus.FRC2013Prometheus
+MicroEdition-Profile: IMP-1.0
+MicroEdition-Configuration: CLDC-1.1

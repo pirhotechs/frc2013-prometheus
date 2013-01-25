@@ -26,8 +26,8 @@ public class DriveWithJoysticks extends CommandBase {
      */
     protected void execute() {
         drivetrain.arcadeDrive(
-                oi.getLeftJoyY(),
-                oi.getLeftJoyX());
+                -oi.getLeftJoyX(),
+                -oi.getLeftJoyY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -1,6 +1,7 @@
 package com.pirhotechs.frc2013prometheus.commands;
 
 import com.pirhotechs.frc2013prometheus.OI;
+import com.pirhotechs.frc2013prometheus.subsystems.Camera;
 import com.pirhotechs.frc2013prometheus.subsystems.DriveTrain;
 import com.pirhotechs.frc2013prometheus.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,7 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
  * CommandBase stores creates and stores each control system. To access a
- * subsystem elsewhere in your code in your code use CommandBase.exampleSubsystem
+ * subsystem elsewhere in your code in your code use
+ * CommandBase.exampleSubsystem
+ *
  * @author Author
  */
 public abstract class CommandBase extends Command {
@@ -18,6 +21,7 @@ public abstract class CommandBase extends Command {
     // Create a single static instance of all of your subsystem
     public static DriveTrain drivetrain = new DriveTrain();
     public static Shooter shooter = new Shooter();
+    public static Camera camera = new Camera();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -30,6 +34,7 @@ public abstract class CommandBase extends Command {
         // Show what command your subsystem is running on the SmartDashboard
         SmartDashboard.putData(drivetrain);
         SmartDashboard.putData(shooter);
+        SmartDashboard.putData(camera);
     }
 
     public CommandBase(String name) {

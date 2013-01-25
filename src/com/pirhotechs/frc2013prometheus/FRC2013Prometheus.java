@@ -55,8 +55,6 @@ public class FRC2013Prometheus extends IterativeRobot {
 
     public void teleopInit() {
 	DriveRobot.start();
-        
-        autonomousCommand.cancel();
     }
 
     /**

@@ -16,7 +16,7 @@ public class OI {
     // You create one by telling it which joystick it's on and which button
     // number it is.
     Joystick leftJoy = new Joystick(1);
-    Button ltBtn1 = new JoystickButton(leftJoy, 1);
+    Button ltBtn1 = new JoystickButton(leftJoy, 8);
     
     public double getLeftJoyX() {
         return leftJoy.getX();

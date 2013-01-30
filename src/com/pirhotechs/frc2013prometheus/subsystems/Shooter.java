@@ -7,6 +7,7 @@ package com.pirhotechs.frc2013prometheus.subsystems;
 import com.pirhotechs.frc2013prometheus.RobotMap;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -26,5 +27,12 @@ public class Shooter extends Subsystem {
     
     public void setSpeed(double speed) {
         shooter.set(speed);
+        SmartDashboard.putDouble("shooterSPD", speed);
+        if(speed != 0) {
+            SmartDashboard.putBoolean("shooterRunning", true);
+        } else {
+            SmartDashboard.putBoolean("shooterRunning", false);
+        }
+        
     }
 }

@@ -5,6 +5,7 @@ import com.pirhotechs.frc2013prometheus.commands.ShooterFire;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -19,10 +20,12 @@ public class OI {
     Button ltBtn1 = new JoystickButton(leftJoy, 8);
     
     public double getLeftJoyX() {
+        //SmartDashboard.putDouble("leftJoyX", leftJoy.getX());
         return leftJoy.getX();
     }
     
     public double getLeftJoyY() {
+        //SmartDashboard.putDouble("leftJoyY", leftJoy.getY());
         return leftJoy.getY();
     }
     

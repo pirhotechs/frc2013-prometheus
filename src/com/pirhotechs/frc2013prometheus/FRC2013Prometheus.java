@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.pirhotechs.frc2013prometheus.commands.CommandBase;
 import com.pirhotechs.frc2013prometheus.commands.DriveWithJoysticks;
+import com.pirhotechs.frc2013prometheus.commands.CompressorStart;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +27,7 @@ public class FRC2013Prometheus extends IterativeRobot {
 
     Command autonomousCommand;
     Command DriveRobot;
+    Command startCompressor;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -34,6 +36,8 @@ public class FRC2013Prometheus extends IterativeRobot {
     public void robotInit() {
         // instantiate the command used for the autonomous period
         DriveRobot = new DriveWithJoysticks();
+        startCompressor = new CompressorStart();
+        
 
         // Initialize all subsystems
         CommandBase.init();
@@ -41,6 +45,7 @@ public class FRC2013Prometheus extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+        //startCompressor.start();
         autonomousCommand.start();
         
         DriveRobot.cancel();
@@ -54,6 +59,8 @@ public class FRC2013Prometheus extends IterativeRobot {
     }
 
     public void teleopInit() {
+        autonomousCommand.cancel();
+        startCompressor.start();  //only use for testing diagnostics
 	DriveRobot.start();
     }
 

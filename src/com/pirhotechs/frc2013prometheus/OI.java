@@ -1,9 +1,12 @@
 
 package com.pirhotechs.frc2013prometheus;
 
+import com.pirhotechs.frc2013prometheus.commands.CompressorStart;
+import com.pirhotechs.frc2013prometheus.commands.CompressorStop;
 import com.pirhotechs.frc2013prometheus.commands.LowerShooter;
 import com.pirhotechs.frc2013prometheus.commands.RaiseShooter;
 import com.pirhotechs.frc2013prometheus.commands.ShooterFire;
+import com.pirhotechs.frc2013prometheus.commands.loaderOn;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -20,6 +23,9 @@ public class OI {
     Joystick leftJoy = new Joystick(1);
     Button ltBtn2 = new JoystickButton(leftJoy, 2);
     Button ltBtn3 = new JoystickButton(leftJoy, 3);
+    Button ltBtn4 = new JoystickButton(leftJoy, 4);
+    Button ltBtn5 = new JoystickButton(leftJoy, 5);
+    Button ltBtn7 = new JoystickButton(leftJoy, 7);
     Button ltBtn8 = new JoystickButton(leftJoy, 8);
     
     public double getLeftJoyX() {
@@ -35,6 +41,9 @@ public class OI {
     public OI() {
         ltBtn2.whenPressed(new LowerShooter());
         ltBtn3.whenPressed(new RaiseShooter());
+        ltBtn4.whenPressed(new CompressorStart());
+        ltBtn5.whenPressed(new loaderOn());
+        ltBtn7.whenPressed(new CompressorStop());
         ltBtn8.whileHeld(new ShooterFire());
     }
     // Another type of button you can create is a DigitalIOButton, which is

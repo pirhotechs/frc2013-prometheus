@@ -59,8 +59,7 @@ public class FRC2013Prometheus extends IterativeRobot {
     }
 
     public void teleopInit() {
-        autonomousCommand.cancel();
-        startCompressor.start();  //only use for testing diagnostics
+        //startCompressor.start();  //only use for testing diagnostics
 	DriveRobot.start();
     }
 

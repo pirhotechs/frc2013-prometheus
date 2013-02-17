@@ -7,6 +7,7 @@ package com.pirhotechs.frc2013prometheus.subsystems;
 import com.pirhotechs.frc2013prometheus.RobotMap;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,12 +21,14 @@ public class Shooter extends Subsystem {
     Compressor shooterComp;
     Solenoid shooterLift;
     Solenoid shooterLower;
+    Relay loader;
     
     public Shooter() {
         shooter = new Jaguar(RobotMap.shooterMotor);
-        shooterComp = new Compressor(1,1);
+        shooterComp = new Compressor(1, 2);
         shooterLift = new Solenoid(1);
         shooterLower = new Solenoid(2);
+        loader = new Relay(1);
     }
 
     public void initDefaultCommand() {
@@ -47,6 +50,10 @@ public class Shooter extends Subsystem {
         shooterComp.start();
     }
     
+    public void stopCompressor() {
+        shooterComp.stop();
+    }
+    
     public void raiseShooter() {
         shooterLift.set(true);
         shooterLower.set(false);
@@ -60,5 +67,14 @@ public class Shooter extends Subsystem {
     public void lockShooter() {
         shooterLift.set(false);
         shooterLower.set(false);
+    }
+    
+    public void loaderOn() {
+        loader.set(Relay.Value.kForward);
+        //loader.setDirection(Relay.Direction.kForward);
+        //loader.set(Relay.Value.kOn);
+    }
+    public void loaderOff() {
+        loader.set(Relay.Value.kOff);
     }
 }

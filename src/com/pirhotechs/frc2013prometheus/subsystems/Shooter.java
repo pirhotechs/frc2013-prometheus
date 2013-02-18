@@ -6,6 +6,7 @@ package com.pirhotechs.frc2013prometheus.subsystems;
 
 import com.pirhotechs.frc2013prometheus.RobotMap;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -22,6 +23,7 @@ public class Shooter extends Subsystem {
     Solenoid shooterLift;
     Solenoid shooterLower;
     Relay loader;
+    DigitalInput loaderSwitch;
     
     public Shooter() {
         shooter = new Jaguar(RobotMap.shooterMotor);
@@ -29,6 +31,7 @@ public class Shooter extends Subsystem {
         shooterLift = new Solenoid(1);
         shooterLower = new Solenoid(2);
         loader = new Relay(1);
+        loaderSwitch = new DigitalInput(2);
     }
 
     public void initDefaultCommand() {
@@ -46,8 +49,16 @@ public class Shooter extends Subsystem {
         }
     }
     
+    public boolean loaderCon() {
+        return loaderSwitch.get();
+    }
+    
     public void startCompressor() {
         shooterComp.start();
+    }
+    
+    public void monitorCompressor() {
+        SmartDashboard.putBoolean("Pressure Switch", shooterComp.getPressureSwitchValue());
     }
     
     public void stopCompressor() {

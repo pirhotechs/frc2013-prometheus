@@ -4,42 +4,36 @@
  */
 package com.pirhotechs.frc2013prometheus.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  *
- * @author Brandyn
+ * @author bdbayes
  */
-public class LowerShooter extends CommandBase {
+public class CompressorMonitor extends CommandBase {
     
-    public LowerShooter() {
+    public CompressorMonitor() {
         requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        shooter.lowerShooter();
-        Timer.delay(0.1);
+        shooter.monitorCompressor();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.lockShooter();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        shooter.lockShooter();
     }
 }

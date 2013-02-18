@@ -6,6 +6,7 @@ import com.pirhotechs.frc2013prometheus.commands.CompressorStop;
 import com.pirhotechs.frc2013prometheus.commands.LowerShooter;
 import com.pirhotechs.frc2013prometheus.commands.RaiseShooter;
 import com.pirhotechs.frc2013prometheus.commands.ShooterFire;
+import com.pirhotechs.frc2013prometheus.commands.ShooterStop;
 import com.pirhotechs.frc2013prometheus.commands.loaderOn;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -27,6 +28,7 @@ public class OI {
     Button ltBtn5 = new JoystickButton(leftJoy, 5);
     Button ltBtn7 = new JoystickButton(leftJoy, 7);
     Button ltBtn8 = new JoystickButton(leftJoy, 8);
+    Button ltBtn9 = new JoystickButton(leftJoy, 9);
     
     public double getLeftJoyX() {
         //SmartDashboard.putDouble("leftJoyX", leftJoy.getX());
@@ -44,7 +46,8 @@ public class OI {
         ltBtn4.whenPressed(new CompressorStart());
         ltBtn5.whenPressed(new loaderOn());
         ltBtn7.whenPressed(new CompressorStop());
-        ltBtn8.whileHeld(new ShooterFire());
+        ltBtn8.whenPressed(new ShooterFire());
+        ltBtn9.whenPressed(new ShooterStop());
     }
     // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if

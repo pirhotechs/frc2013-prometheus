@@ -8,11 +8,13 @@
 package com.pirhotechs.frc2013prometheus;
 
 
+import com.pirhotechs.frc2013prometheus.commands.AutonomousCommand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.pirhotechs.frc2013prometheus.commands.CommandBase;
+import com.pirhotechs.frc2013prometheus.commands.CompressorMonitor;
 import com.pirhotechs.frc2013prometheus.commands.DriveWithJoysticks;
 import com.pirhotechs.frc2013prometheus.commands.CompressorStart;
 
@@ -28,6 +30,7 @@ public class FRC2013Prometheus extends IterativeRobot {
     Command autonomousCommand;
     Command DriveRobot;
     Command startCompressor;
+    Command monitorCompressor;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -37,6 +40,7 @@ public class FRC2013Prometheus extends IterativeRobot {
         // instantiate the command used for the autonomous period
         DriveRobot = new DriveWithJoysticks();
         startCompressor = new CompressorStart();
+        monitorCompressor = new CompressorMonitor();
         
 
         // Initialize all subsystems
@@ -68,6 +72,7 @@ public class FRC2013Prometheus extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        monitorCompressor.start();
     }
     
     /**

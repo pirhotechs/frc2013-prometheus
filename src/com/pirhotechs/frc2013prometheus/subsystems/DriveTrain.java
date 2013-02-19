@@ -31,6 +31,7 @@ public class DriveTrain extends PIDSubsystem {
     public DriveTrain() {
         super("DriveTrain", Kp, Ki, Kd);
         drive = new RobotDrive(RobotMap.leftMotor, RobotMap.rightMotor);
+        drive.setSafetyEnabled(false);
         
         //rangefinder = new AnalogChannel(RobotMap.rangefinder);
     }

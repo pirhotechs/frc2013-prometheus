@@ -23,11 +23,7 @@ public class loaderOn extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        shooter.loaderOn();
-        Timer.delay(0.3);
-        while(shooter.loaderCon()) {
-            shooter.loaderOn();
-        }
+        shooter.cycleLoader();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +33,7 @@ public class loaderOn extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        shooter.loaderOff();
+        //shooter.loaderOff();
     }
 
     // Called when another command which requires one or more of the same

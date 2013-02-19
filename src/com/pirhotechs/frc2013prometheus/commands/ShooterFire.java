@@ -31,7 +31,7 @@ public class ShooterFire extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         shooterSPD = prefs.getDouble("ShooterSpeed", -1.0);
-        shooter.setSpeed(shooterSPD);
+        shooter.shooterOn();
     }
 
     // Make this return true when this Command no longer needs to run execute()

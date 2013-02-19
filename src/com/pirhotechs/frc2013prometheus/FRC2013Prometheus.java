@@ -17,6 +17,7 @@ import com.pirhotechs.frc2013prometheus.commands.CommandBase;
 import com.pirhotechs.frc2013prometheus.commands.CompressorMonitor;
 import com.pirhotechs.frc2013prometheus.commands.DriveWithJoysticks;
 import com.pirhotechs.frc2013prometheus.commands.CompressorStart;
+import edu.wpi.first.wpilibj.Watchdog;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,7 +38,9 @@ public class FRC2013Prometheus extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+        Watchdog.getInstance().setEnabled(false);
         // instantiate the command used for the autonomous period
+        autonomousCommand = new AutonomousCommand();
         DriveRobot = new DriveWithJoysticks();
         startCompressor = new CompressorStart();
         monitorCompressor = new CompressorMonitor();

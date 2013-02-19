@@ -5,15 +5,16 @@
 package com.pirhotechs.frc2013prometheus.subsystems;
 
 import edu.wpi.first.wpilibj.camera.AxisCamera;
+import edu.wpi.first.wpilibj.camera.AxisCameraException;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.image.BinaryImage;
 import edu.wpi.first.wpilibj.image.ColorImage;
 import edu.wpi.first.wpilibj.image.CriteriaCollection;
+import edu.wpi.first.wpilibj.image.HSLImage;
 import edu.wpi.first.wpilibj.image.LinearAverages;
 import edu.wpi.first.wpilibj.image.NIVision;
 import edu.wpi.first.wpilibj.image.NIVisionException;
 import edu.wpi.first.wpilibj.image.ParticleAnalysisReport;
-import edu.wpi.first.wpilibj.image.RGBImage;
 
 /**
  *
@@ -55,13 +56,26 @@ public class Camera extends Subsystem {
         double xEdge;
         double yEdge;
     }
+    
+    public void takePic() throws NIVisionException {
+        HSLImage image = null;
+        try {
+            image = (HSLImage) camera.getImage();
+        } catch (AxisCameraException ex) {
+            ex.printStackTrace();
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
+        image.write("testimg.jpg");
+        image.free();
+    }
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
 
-    public void findTarget() {
+    public void findTarget() throws AxisCameraException {
         try {
             /**
              * Do the image capture with the camera and apply the algorithm
@@ -73,7 +87,8 @@ public class Camera extends Subsystem {
              */
             //ColorImage image = camera.getImage();     // comment if using stored images
             ColorImage image;                           // next 2 lines read image from flash on cRIO
-            image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
+            //image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
+            image = camera.getImage();
             BinaryImage thresholdImage = image.thresholdHSV(60, 100, 90, 255, 20, 255);   // keep only red objects
             //thresholdImage.write("/threshold.bmp");
             BinaryImage convexHullImage = thresholdImage.convexHull(false);          // fill in occluded rectangles

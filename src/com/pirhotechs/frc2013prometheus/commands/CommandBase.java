@@ -26,6 +26,7 @@ public abstract class CommandBase extends Command {
     public static CompressorStop compStop = new CompressorStop();
     public static RaiseShooter shooterRaise = new RaiseShooter();
     public static LowerShooter shooterLower = new LowerShooter();
+    public static AutonomousCommand autoCom = new AutonomousCommand();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -39,6 +40,7 @@ public abstract class CommandBase extends Command {
         SmartDashboard.putData("Stop Compressor", compStop);
         SmartDashboard.putData("Raise Shooter", shooterRaise);
         SmartDashboard.putData("Lower Shooter", shooterLower);
+        SmartDashboard.putData("Auto Command", autoCom);
         
         //SmartDashboard.putData("Start Compressor",CompressorStart);
 

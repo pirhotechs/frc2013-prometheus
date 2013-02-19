@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,6 +25,7 @@ public class Shooter extends Subsystem {
     Solenoid shooterLower;
     Relay loader;
     DigitalInput loaderSwitch;
+    double shooterSpeed;
     
     public Shooter() {
         shooter = new Jaguar(RobotMap.shooterMotor);
@@ -32,6 +34,7 @@ public class Shooter extends Subsystem {
         shooterLower = new Solenoid(2);
         loader = new Relay(1);
         loaderSwitch = new DigitalInput(2);
+        shooterSpeed = -1.0;
     }
 
     public void initDefaultCommand() {
@@ -39,9 +42,9 @@ public class Shooter extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void setSpeed(double speed) {
+    private void setSpeed(double speed) {
         shooter.set(speed);
-        SmartDashboard.putDouble("shooterSPD", speed);
+        SmartDashboard.putDouble("shooterSPD", -speed);
         if(speed != 0) {
             SmartDashboard.putBoolean("shooterRunning", true);
         } else {
@@ -49,8 +52,25 @@ public class Shooter extends Subsystem {
         }
     }
     
+    public void shooterOn() {
+        shooter.set(shooterSpeed);
+    }
+    
+    public void shooterOff() {
+        shooter.set(0.0);
+    }
+    
     public boolean loaderCon() {
         return loaderSwitch.get();
+    }
+    
+    public void cycleLoader() {
+        loaderOn();
+        Timer.delay(0.3);
+        while(loaderCon()) {
+            loaderOn();
+        }
+        loaderOff();
     }
     
     public void startCompressor() {
@@ -87,5 +107,19 @@ public class Shooter extends Subsystem {
     }
     public void loaderOff() {
         loader.set(Relay.Value.kOff);
+    }
+    
+    public void speedUp() {
+        if(shooterSpeed < -0.4) {
+            shooterSpeed += 0.05;
+            setSpeed(shooterSpeed);
+        }
+    }
+    
+    public void speedDown() {
+        if(shooterSpeed > -1.0) {
+            shooterSpeed -= 0.05;
+            setSpeed(shooterSpeed);
+        }
     }
 }

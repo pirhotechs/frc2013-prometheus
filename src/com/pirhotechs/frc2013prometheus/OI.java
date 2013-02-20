@@ -13,6 +13,7 @@ import com.pirhotechs.frc2013prometheus.commands.loaderOn;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -24,6 +25,7 @@ public class OI {
     // You create one by telling it which joystick it's on and which button
     // number it is.
     Joystick leftJoy = new Joystick(1);
+    Joystick rightJoy = new Joystick(2);
     Button ltBtn2 = new JoystickButton(leftJoy, 2);
     Button ltBtn3 = new JoystickButton(leftJoy, 3);
     Button ltBtn4 = new JoystickButton(leftJoy, 4);
@@ -34,6 +36,27 @@ public class OI {
     Button ltBtn9 = new JoystickButton(leftJoy, 9);
     Button ltBtn10 = new JoystickButton(leftJoy, 10);
     Button ltBtn11 = new JoystickButton(leftJoy, 11);
+    Trigger ltTrigger = new Trigger() {
+
+        public boolean get() {
+            return leftJoy.getTrigger();
+        }
+    };
+    Button rtBtn2 = new JoystickButton(rightJoy, 2);
+    Button rtBtn3 = new JoystickButton(rightJoy, 3);
+    Button rtBtn4 = new JoystickButton(rightJoy, 4);
+    Button rtBtn5 = new JoystickButton(rightJoy, 5);
+    Button rtBtn6 = new JoystickButton(rightJoy, 6);
+    Button rtBtn7 = new JoystickButton(rightJoy, 7);
+    Button rtBtn8 = new JoystickButton(rightJoy, 8);
+    Button rtBtn9 = new JoystickButton(rightJoy, 9);
+    Button rtBtn10 = new JoystickButton(rightJoy, 10);
+    Button rtBtn11 = new JoystickButton(rightJoy, 11);
+    Trigger rtTrigger = new Trigger() {
+        public boolean get() {
+            return rightJoy.getTrigger();
+        }
+    };
     
     public double getLeftJoyX() {
         //SmartDashboard.putDouble("leftJoyX", leftJoy.getX());
@@ -45,16 +68,24 @@ public class OI {
         return leftJoy.getY();
     }
     
+    public double getRightJoyX() {
+        return rightJoy.getX();
+    }
+    
+    public double getRightJoyY() {
+        return rightJoy.getY();
+    }
+    
     public OI() {
+        ltTrigger.whenActive(new loaderOn());
         ltBtn2.whenPressed(new LowerShooter());
         ltBtn3.whenPressed(new RaiseShooter());
-        ltBtn4.whenPressed(new CompressorStart());
-        ltBtn5.whenPressed(new loaderOn());
-        ltBtn7.whenPressed(new CompressorStop());
-        ltBtn8.whenPressed(new ShooterFire());
-        ltBtn9.whenPressed(new ShooterStop());
         ltBtn10.whenPressed(new ShooterDown());
         ltBtn11.whenPressed(new ShooterUp());
+        rtBtn6.whenPressed(new CompressorStart());
+        rtBtn7.whenPressed(new CompressorStop());
+        rtBtn8.whenPressed(new ShooterFire());
+        rtBtn9.whenPressed(new ShooterStop());
     }
     // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if

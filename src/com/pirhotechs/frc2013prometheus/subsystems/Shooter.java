@@ -21,20 +21,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter extends Subsystem {
     Jaguar shooter;
     Compressor shooterComp;
-    Solenoid shooterLift;
-    Solenoid shooterLower;
-    Relay loader;
+    Solenoid shooterUp;
+    Solenoid shooterDown;
+    Relay loaderRelay;
     DigitalInput loaderSwitch;
     double shooterSpeed;
     
     public Shooter() {
         shooter = new Jaguar(RobotMap.shooterMotor);
-        shooterComp = new Compressor(1, 2);
-        shooterLift = new Solenoid(1);
-        shooterLower = new Solenoid(2);
-        loader = new Relay(1);
-        loaderSwitch = new DigitalInput(2);
-        shooterSpeed = -1.0;
+        shooterComp = new Compressor(RobotMap.compressorSwitch, RobotMap.compressorRelay);
+        shooterUp = new Solenoid(RobotMap.shooterUpSolenoid);
+        shooterDown = new Solenoid(RobotMap.shooterDownSolenoid);
+        loaderRelay = new Relay(RobotMap.shooterLoaderRelay);
+        loaderSwitch = new DigitalInput(RobotMap.shooterLoaderSwitch);
+        shooterSpeed = RobotMap.shooterSpeed;
     }
 
     public void initDefaultCommand() {
@@ -86,27 +86,27 @@ public class Shooter extends Subsystem {
     }
     
     public void raiseShooter() {
-        shooterLift.set(true);
-        shooterLower.set(false);
+        shooterUp.set(true);
+        shooterDown.set(false);
     }
     
     public void lowerShooter() {
-        shooterLift.set(false);
-        shooterLower.set(true);
+        shooterUp.set(false);
+        shooterDown.set(true);
     }
     
     public void lockShooter() {
-        shooterLift.set(false);
-        shooterLower.set(false);
+        shooterUp.set(false);
+        shooterDown.set(false);
     }
     
     public void loaderOn() {
-        loader.set(Relay.Value.kForward);
+        loaderRelay.set(Relay.Value.kForward);
         //loader.setDirection(Relay.Direction.kForward);
         //loader.set(Relay.Value.kOn);
     }
     public void loaderOff() {
-        loader.set(Relay.Value.kOff);
+        loaderRelay.set(Relay.Value.kOff);
     }
     
     public void speedUp() {
